@@ -1,8 +1,8 @@
 <?php
 /**
- * @author                Carlos M. Cámara
- * @copyright           Copyright (C) 2012 Carlos M. Cámara Mora. All rights reserved.
- * @license                GNU General Public License version 2 or later; see LICENSE.txt
+ * @author		Carlos M. Cámara
+ * @copyright	Copyright (C) 2012-2014 Carlos M. Cámara Mora. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access.
@@ -35,60 +35,71 @@ class plgContentReadingtime extends JPlugin
 	*/
 	public function onContentBeforeDisplay($context, &$row, &$params, $page=0)
 	{
-		$html = '';
-                
-                                    //Get Params
-                                    $excludedCategories = $this->params->def('excludedcategories');
-                                    
-                                    if(!in_array($row->catid, $excludedCategories))
-                                    {
-                                    
-                                        //Word per minute
-                                        $lowRate = 200;
-                                        $highRate = 400;
-                                        
-                                        if(!isset($row->fulltext))
-                                        {
-                                            $db = JFactory::getDbo();
-                                            $query = "SELECT `fulltext` FROM #__content WHERE id=".$row->id;
-                                            $db->setQuery($query);
-                                            $fullText = $db->loadResult();
-                                            
-                                            $fullArticle = $row->introtext." ".$fullText;
-                                        }
-                                        else
-                                        {
-                                            $fullArticle = $row->introtext." ".$row->fulltext;
-                                        }
+		if ($context == 'com_content.article' || $context == 'com_content.featured' || $context == 'com_content.category')
+		{
+			$html = '';
 
-                                        $countWords = str_word_count(strip_tags($fullArticle));
+			//Get Params
+			$excludedCategories = $this->params->def('excludedcategories');
 
-                                        $quickTime = ceil($countWords/$lowRate);
-                                        $slowTime = ceil($countWords/$highRate);
+			if($excludedCategories)
+			{
+				if(in_array($row->catid, $excludedCategories))
+				{
+					return;
+				}
+			}
 
-                                        $customStyle =$this->params->def( 'custom-style', '');
+			//Word per minute
+			$lowRate = 200;
+			$highRate = 400;
 
-                                        $html="<div class=\"reading-time\"";
-                                        if ( $this->params->def( 'default-style', '1') )    
-                                        {
-                                            $html .= "style=\"font-weight:bold;\"";
-                                        }
-                                        else if($customStyle!="")
-                                        {
-                                            $html .= "style=\"".$customStyle."\"";
-                                        }
-                                        $html .= ">(".JText::_('PLG_READINGTIME_LABEL').": ";
-                                        if ($quickTime == $slowTime)
-                                        {
-                                            $html .= $quickTime;
-                                        }
-                                        else
-                                        {
-                                            $html .= $slowTime." - ". $quickTime;
-                                        }
+			if(!isset($row->fulltext) && isset($row->id))
+			{
+				$db = JFactory::getDbo();
+				$query = "SELECT `fulltext` FROM #__content WHERE id=".$row->id;
+				$db->setQuery($query);
+				$fullText = $db->loadResult();
 
-                                        $html .= " ".JText::plural('PLG_READINGTIME_N_MINUTES', $quickTime ).")</div>";
-                                    }
-		return $html;
+				$fullArticle = $row->introtext." ".$fullText;
+			}
+			else
+			{
+				$fullArticle = $row->introtext." ".$row->fulltext;
+			}
+
+			$countWords = str_word_count(strip_tags($fullArticle));
+
+			$quickTime = ceil($countWords/$lowRate);
+			$slowTime = ceil($countWords/$highRate);
+
+			$customStyle =$this->params->def( 'custom-style', '');
+
+			$html="<div class=\"reading-time\"";
+			if ( $this->params->def( 'default-style', '1') )
+			{
+				$html .= "style=\"font-weight:bold;\"";
+			}
+			else if($customStyle!="")
+			{
+				$html .= "style=\"".$customStyle."\"";
+			}
+			$html .= ">(".JText::_('PLG_READINGTIME_LABEL').": ";
+			if ($quickTime == $slowTime)
+			{
+				$html .= $quickTime;
+			}
+			else
+			{
+				$html .= $slowTime." - ". $quickTime;
+			}
+
+			$html .= " ".JText::plural('PLG_READINGTIME_N_MINUTES', $quickTime ).")</div>";
+
+
+
+			return $html;
+		}
+		return;
 	}
 }
