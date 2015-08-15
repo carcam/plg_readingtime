@@ -73,32 +73,32 @@ class plgContentReadingtime extends JPlugin
 			$quickTime = ceil($countWords/$lowRate);
 			$slowTime = ceil($countWords/$highRate);
 
-			$customStyle =$this->params->def( 'custom-style', '');
-
-			$html="<div class=\"reading-time\"";
 			if ( $this->params->def( 'default-style', '1') )
 			{
-				$html .= "style=\"font-weight:bold;\"";
-			}
-			else if($customStyle!="")
-			{
-				$html .= "style=\"".$customStyle."\"";
-			}
-			$html .= ">(".JText::_('PLG_READINGTIME_LABEL').": ";
-			if ($quickTime == $slowTime)
-			{
-				$html .= $quickTime;
+				$customStyle = "font-weight:bold;";
 			}
 			else
 			{
-				$html .= $slowTime." - ". $quickTime;
+				$customStyle =$this->params->def( 'custom-style', '');
 			}
 
-			$html .= " ".JText::plural('PLG_READINGTIME_N_MINUTES', $quickTime ).")</div>";
+			//Render plugin
+			$path = JPluginHelper::getLayoutPath('content', 'readingtime');
+			ob_start();
+			include $path;
+			$html = ob_get_clean();
 
+			$readingTimeData = new stdClass();
+			$readingTimeData->slowtime = $slowTime;
+			$readingTimeData->quicktime = $quickTime;
+			$readingTimeData->formattedtime = $html;
+			
+			$row->readingtime = $readingTimeData;
 
-
-			return $html;
+			if ( !$this->params->def( 'hide-output', '0') )
+			{
+				return $html;
+			}
 		}
 		return;
 	}
