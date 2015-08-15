@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>carlos@hepta.es</authorEmail>
 	<authorUrl>www.cmcamara.com</authorUrl>
-	<version>3.3.2</version>
+	<version>3.3.3</version>
 	<description>PLG_READINGTIME_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="readingtime">readingtime.php</filename>
@@ -16,10 +16,12 @@
 	<languages folder="languages">
 		<language tag="en-GB">en-GB.plg_content_readingtime.ini</language>
 		<language tag="en-GB">en-GB.plg_content_readingtime.sys.ini</language>
-        	<language tag="es-ES">es-ES.plg_content_readingtime.ini</language>
+		<language tag="es-ES">es-ES.plg_content_readingtime.ini</language>
 		<language tag="es-ES">es-ES.plg_content_readingtime.sys.ini</language>
-        	<language tag="nl-NL">nl-NL.plg_content_readingtime.ini</language>
+		<language tag="nl-NL">nl-NL.plg_content_readingtime.ini</language>
 		<language tag="nl-NL">nl-NL.plg_content_readingtime.sys.ini</language>
+		<language tag="de-DE">de-DE.plg_content_readingtime.ini</language>
+		<language tag="de-DE">de-DE.plg_content_readingtime.sys.ini</language>
 	</languages>
 	<config>
 		<fields name="params" >
