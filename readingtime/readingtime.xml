@@ -11,6 +11,7 @@
 	<description>PLG_READINGTIME_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="readingtime">readingtime.php</filename>
+		<folder>tmpl</folder>
 		<filename>index.html</filename>
 	</files>
 	<languages folder="languages">
