@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Only compatible with Joomla! 3.4.0 or greater
+- Fixed xml to allow upgrading the plugin
 
 ### Fixed
 - Issue when reading time is between 1 - 2 minute
