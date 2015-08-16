@@ -95,7 +95,7 @@ class plgContentReadingtime extends JPlugin
 			
 			$row->readingtime = $readingTimeData;
 
-			if ( !$this->params->def( 'hide-output', '0') )
+			if ( !$this->params->def( 'hideoutput', '0') )
 			{
 				return $html;
 			}
