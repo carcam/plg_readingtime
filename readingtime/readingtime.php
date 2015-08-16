@@ -70,8 +70,8 @@ class plgContentReadingtime extends JPlugin
 
 			$countWords = str_word_count(strip_tags($fullArticle));
 
-			$quickTime = ceil($countWords/$lowRate);
-			$slowTime = ceil($countWords/$highRate);
+			$slowTime = ceil($countWords/$lowRate);
+			$quickTime = ceil($countWords/$highRate);
 
 			if ( $this->params->def( 'default-style', '1') )
 			{
