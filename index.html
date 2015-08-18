@@ -64,12 +64,21 @@
 <h5>
 <a id="customizing-plugin-output-with-templates-overrides" class="anchor" href="#customizing-plugin-output-with-templates-overrides" aria-hidden="true"><span class="octicon octicon-link"></span></a>Customizing plugin output with templates overrides</h5>
 
-<p>You just need to copy the file: <em>plugins/content/readingtime/tmpl/default</em> to the folder <em>templates/YOUR_TEMPLATE/html/plg_content_readingtime/default.php</em>  </p>
+<p>You just need to copy the file: <em>plugins/content/readingtime/tmpl/default</em> to the folder <em>templates/YOUR_TEMPLATE/html/plg_content_readingtime/default.php</em> and modify styling there as per your needs.</p>
+
+<h5>
+<a id="adding-reading-time-directly-to-your-template-overrides" class="anchor" href="#adding-reading-time-directly-to-your-template-overrides" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding reading time directly to your template overrides.</h5>
+
+<p>If you want to include reading time information directly into your template override, since version 3.4.0 you can easily do it. If you check the item object in your article template, you will notice there is a new property called readingtime. This property is an object with 3 properties:</p>
+
+<p>$this-&gt;item-&gt;readingtime-&gt;slowtime : The slower time your users might take reading the article
+$this-&gt;item-&gt;readingtime-&gt;quicktime : The quicker time your users might take reading the article
+$this-&gt;item-&gt;readingtime-&gt;formattedtime : The plugin output, which you can override using directions in previous section.</p>
 
 <h3>
 <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h3>
 
-<p>We currently have no demo site for this, but you can see in action in the <a href="http://manualesjoomla.es/es/blog">blog of ManualesJoomla.es</a> where we show the plugin with some customizations. Even a language override!!</p>
+<p>We currently have no demo site for this, but you can see in action in the <a href="http://manualesjoomla.es/es/blog">blog of ManualesJoomla.es</a> where we show the plugin using a template overrides and even a language override!!</p>
 
 <h3>
 <a id="translation-credits" class="anchor" href="#translation-credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Translation Credits</h3>
@@ -77,8 +86,11 @@
 <p>Estimated Reading Time plugin is available in English, Spanish and Dutch. Thanks to:</p>
 
 <ul>
+<li>Arabic - <strong>Hayat</strong>
+</li>
 <li>Dutch - <strong>Wouter Franken</strong>
 </li>
+<li>German -</li>
 <li>Spanish - <strong>Carlos Cámara</strong> (Yes! it's me!!) ;)</li>
 </ul>
 
