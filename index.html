@@ -48,13 +48,12 @@
 
 <p>You can configure following settings:</p>
 
-<p><strong>Excluded Categories.</strong> Use this to specify categories which articles will not show Estimated Reading Time.</p>
-
-<p><strong>Use Default Styling.</strong> With this setting you can specify if you want to use default styling or specify your custom style below.</p>
-
-<p><strong>Custom Styling.</strong> Here you can add your custom css for the article reading time text. Text here will be included in a <em>style</em> HTML property of the container tag.</p>
-
-<p><strong>Hide Output.</strong> This option makes the plugin to not add the reading time to your article layout. This is useful if you want to use reading time directly in a template override for your article.</p>
+<ul>
+<li><p><strong>Excluded Categories.</strong> Use this to specify categories which articles will not show Estimated Reading Time.</p></li>
+<li><p><strong>Use Default Styling.</strong> With this setting you can specify if you want to use default styling or specify your custom style below.</p></li>
+<li><p><strong>Custom Styling.</strong> Here you can add your custom css for the article reading time text. Text here will be included in a <em>style</em> HTML property of the container tag.</p></li>
+<li><p><strong>Hide Output.</strong> This option makes the plugin to not add the reading time to your article layout. This is useful if you want to use reading time directly in a template override for your article.</p></li>
+</ul>
 
 <h4>
 <a id="template-overrides" class="anchor" href="#template-overrides" aria-hidden="true"><span class="octicon octicon-link"></span></a>Template Overrides</h4>
@@ -71,9 +70,10 @@
 
 <p>If you want to include reading time information directly into your template override, since version 3.4.0 you can easily do it. If you check the item object in your article template, you will notice there is a new property called readingtime. This property is an object with 3 properties:</p>
 
-<p>$this-&gt;item-&gt;readingtime-&gt;slowtime : The slower time your users might take reading the article
+<pre><code>$this-&gt;item-&gt;readingtime-&gt;slowtime : The slower time your users might take reading the article
 $this-&gt;item-&gt;readingtime-&gt;quicktime : The quicker time your users might take reading the article
-$this-&gt;item-&gt;readingtime-&gt;formattedtime : The plugin output, which you can override using directions in previous section.</p>
+$this-&gt;item-&gt;readingtime-&gt;formattedtime : The plugin output, which you can override using directions in previous section.
+</code></pre>
 
 <h3>
 <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h3>
@@ -89,6 +89,8 @@ $this-&gt;item-&gt;readingtime-&gt;formattedtime : The plugin output, which you 
 <li>Arabic - <strong>Hayat</strong>
 </li>
 <li>Dutch - <strong>Wouter Franken</strong>
+</li>
+<li>French - <strong>Marc-Antoine Thevenet</strong>
 </li>
 <li>German - <strong>Alexander Schmidt</strong>
 </li>
@@ -110,6 +112,8 @@ $this-&gt;item-&gt;readingtime-&gt;formattedtime : The plugin output, which you 
 <p>Having trouble with Estimated Reading Time Plugin? Please write an issue using <a href="https://github.com/carcam/plg_readingtime/issues">GitHub Issues</a> or send me a line ;). I'll address it ASAP.</p>
 
 <p>If you just want to say thank you or want to share something with me, please contact me at <a href="mailto:carlos@hepta.es">carlos@hepta.es</a> .</p>
+
+<p>Also since 3.4.0 release we maintain a <a href="https://github.com/carcam/plg_readingtime/blob/master/CHANGELOG.md">detailed CHANGELOG</a> for this project.</p>
       </section>
     </div>
 
