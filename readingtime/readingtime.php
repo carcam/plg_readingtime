@@ -51,8 +51,8 @@ class plgContentReadingtime extends JPlugin
 			}
 
 			//Word per minute
-			$lowRate = 200;
-			$highRate = 400;
+			$lowRate = $this->params->def( 'slow-read', '200');
+			$highRate = $this->params->def( 'fast-read', '400');
 
 			if(!isset($row->fulltext) && isset($row->id))
 			{
