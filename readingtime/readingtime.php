@@ -83,7 +83,7 @@ class plgContentReadingtime extends JPlugin
 			}
 
 			//Render plugin
-			$path = JPluginHelper::getLayoutPath('content', 'readingtime');
+			$path = JPluginHelper::getLayoutPath('content', 'readingtime', str_replace(".php", "", $this->params->def( 'layout', '')));
 			ob_start();
 			include $path;
 			$html = ob_get_clean();
