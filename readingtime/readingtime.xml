@@ -43,16 +43,51 @@
                             <option value="0">JNO</option>
                             <option value="1">JYES</option>
                     </field>
+            </fieldset>
+            <fieldset name="reading_progress_indicator">
                     <field name="showindicator" type="radio" default="1" label="PLG_READINGTIME_SHOW_INDICATOR_LABEL" description="PLG_READINGTIME_SHOW_INDICATOR_DESCRIPTION">
                             <option value="0">JNO</option>
                             <option value="1">JYES</option>
                     </field>
-                    <field name="indicatortype" type="list"
-                        label="PLG_READINGTIME_INDICATOR_TYPE_LABEL"
-                        description="PLG_READINGTIME_INDICATOR_TYPE_DESCRIPTION"
+                    <field name="bar_indicator_type" type="list"
+                        label="PLG_READINGTIME_BAR_INDICATOR_TYPE_LABEL"
+                        description="PLG_READINGTIME_BAR_INDICATOR_TYPE_DESCRIPTION"
+                        default="boostrap2"
                         showon="showindicator:1"
                         >
-                        <option value="bar">PLG_READINGTIME_SHOW_INDICATOR_OPTION_PROGRESS_BAR</option>
+                        <option value="">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_HTML5</option>
+                        <option value="bootstrap2">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_BOOTSTRAP2</option>
+                        <option value="bootstrap3">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_BOOTSTRAP3</option>
+                        <option value="uikit2">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_UIKIT2</option>
+                    </field>
+                    <field name="bar_indicator_context" type="list"
+                        label="PLG_READINGTIME_BAR_INDICATOR_CONTEXT_LABEL"
+                        description="PLG_READINGTIME_BAR_INDICATOR_CONTEXT_DESCRIPTION"
+                        default="info"
+                        showon="bar_indicator_type:bootstrap2[OR]bar_indicator_type:bootstrap3[OR]bar_indicator_type:uikit2"
+                        >
+                        <option value="info">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_INFO</option>
+                        <option value="success">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_SUCCESS</option>
+                        <option value="warning">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_WARNING</option>
+                        <option value="danger">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_DANGER</option>
+                    </field>
+                    <field name="bar_indicator_striped" type="radio"
+                        default="0"
+                        label="PLG_READINGTIME_BAR_INDICATOR_STRIPED_LABEL"
+                        description="PLG_READINGTIME_BAR_INDICATOR_STRIPED_DESCRIPTION"
+                        showon="bar_indicator_type:bootstrap2[OR]bar_indicator_type:bootstrap3[OR]bar_indicator_type:uikit2"
+                    >
+                            <option value="0">JNO</option>
+                            <option value="1">JYES</option>
+                    </field>
+                    <field name="bar_indicator_animated" type="radio"
+                        default="0"
+                        label="PLG_READINGTIME_BAR_INDICATOR_ANIMATED_LABEL"
+                        description="PLG_READINGTIME_BAR_INDICATOR_ANIMATED_DESCRIPTION"
+                        showon="bar_indicator_type:bootstrap2[OR]bar_indicator_type:bootstrap3[OR]bar_indicator_type:uikit2"
+                    >
+                            <option value="0">JNO</option>
+                            <option value="1">JYES</option>
                     </field>
             </fieldset>
         </fields>

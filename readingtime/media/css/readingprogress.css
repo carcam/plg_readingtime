@@ -1,4 +1,5 @@
-progress.ert-progress {
+
+.ert-progress {
     position: fixed;
     left: 0;
     top: 0;
@@ -25,3 +26,12 @@ progress.ert-progress::-webkit-progress-value{
     background-color: #1B3254;
 }
 
+.ert-progress-label{
+    position: fixed;
+    top: -2px;
+    left: 0;
+    color: #000000;
+    mix-blend-mode: hard-light;
+    text-align: center;
+    width: 100%;
+}

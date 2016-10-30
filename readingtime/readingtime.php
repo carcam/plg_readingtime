@@ -102,7 +102,19 @@ class plgContentReadingtime extends JPlugin
                 JHtml::script('plg_content_readingtime/readingprogress.js', false, true);
                 JHtml::stylesheet('plg_content_readingtime/readingprogress.css', array(), true);
 
-                $row->text = '<progress class="ert-progress" value="0"></progress><span id="ert-start"></span>' . $row->text;
+                $indicatorType = $this->params->get('bar_indicator_type','');
+
+                if ($indicatorType){
+                    $displayData[] = $this->params->get('bar_indicator_context','info');
+                    $displayData[] = ($this->params->get('bar_indicator_striped','0'))?'striped':'';
+                    $displayData[] = ($this->params->get('bar_indicator_animated','0'))?' active':'';
+                }
+
+
+                $layout = new JLayoutFile('progressbar', null, array('debug'=>false,'suffixes'=>array($indicatorType)));
+                $layout->addIncludePaths(JPATH_PLUGINS . '/content/readingtime/layouts');
+
+                $row->text = $layout->render($displayData) . '<span id="ert-start"></span>' . $row->text;
             }
         }
         return;
