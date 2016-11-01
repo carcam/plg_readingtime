@@ -1,50 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.4" type="plugin" group="content" method="upgrade">
-	<name>plg_content_readingtime</name>
-	<author>Carlos M. Cámara Mora</author>
-	<creationDate>March 2012</creationDate>
-	<copyright>Copyright (C) 2012-2015 Carlos M. Cámara Mora. All rights reserved.</copyright>
-	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<authorEmail>carlos@hepta.es</authorEmail>
-	<authorUrl>www.cmcamara.com</authorUrl>
-	<version>3.4.3</version>
-	<description>PLG_READINGTIME_XML_DESCRIPTION</description>
-	<files>
-		<filename plugin="readingtime">readingtime.php</filename>
-		<folder>tmpl</folder>
-		<filename>index.html</filename>
-	</files>
-	<languages folder="languages">
-		<language tag="ar-AA">ar-AA.plg_content_readingtime.ini</language>
-		<language tag="ar-AA">ar-AA.plg_content_readingtime.sys.ini</language>
-		<language tag="de-DE">de-DE.plg_content_readingtime.ini</language>
-		<language tag="de-DE">de-DE.plg_content_readingtime.sys.ini</language>
-		<language tag="en-GB">en-GB.plg_content_readingtime.ini</language>
-		<language tag="en-GB">en-GB.plg_content_readingtime.sys.ini</language>
-		<language tag="es-ES">es-ES.plg_content_readingtime.ini</language>
-		<language tag="es-ES">es-ES.plg_content_readingtime.sys.ini</language>
-		<language tag="nl-NL">nl-NL.plg_content_readingtime.ini</language>
-		<language tag="nl-NL">nl-NL.plg_content_readingtime.sys.ini</language>
-	</languages>
-	<config>
-		<fields name="params" >
-			<fieldset name="basic">
-					<field name="excludedcategories" multiple="true" extension="com_content" type="category" label="PLG_READINGTIME_CHOOSE_CATEGORY_LBL" description="PLG_READINGTIME_CHOOSE_CATEGORY_DSC" />
-					<field name="default-style" type="radio" default="1" label="PLG_READINGTIME_DEFAULT_STYLING_LBL" description="PLG_READINGTIME_DEFAULT_STYLING_DSC">
-							<option value="0">JNO</option>
-							<option value="1">JYES</option>
-					</field>
-					<field name="custom-style" type="textarea" default="" label="PLG_READINGTIME_CUSTOM_STYLE_LBL" description="PLG_READINGTIME_CUSTOM_STYLE_DSC" />
-					<field name="hideoutput" type="radio" default="0" label="PLG_READINGTIME_HIDE_OUTPUT_LBL" description="PLG_READINGTIME_HIDE_OUTPUT_DSC">
-							<option value="0">JNO</option>
-							<option value="1">JYES</option>
-					</field>
-					<field name="layout" type="filelist" default="" label="PLG_READINGTIME_OPTIONS_CHOOSE_LAYOUT_LBL" description="PLG_READINGTIME_OPTIONS_CHOOSE_LAYOUT_DESC" directory="/plugins/content/readingtime/tmpl/" filter="" exclude="" stripext="" />				
-			</fieldset>
-			<fieldset name="PLG_READINGTIME_OPTIONS_READINGTIME">
-					<field name="slow-reader" type="number" label="PLG_READINGTIME_OPTIONS_SLOW_READER_LBL" description="PLG_READINGTIME_OPTIONS_SLOW_READER_DSC" default="200" />
-					<field name="fast-reader" type="number" label="PLG_READINGTIME_OPTIONS_FAST_READER_LBL" description="PLG_READINGTIME_OPTIONS_FAST_READER_DSC" default="400" />
-			</fieldset>
-		</fields>
-	</config>
+    <name>plg_content_readingtime</name>
+    <author>Carlos M. Cámara Mora</author>
+    <creationDate>October 2016</creationDate>
+    <copyright>Copyright (C) 2012-2016 Hepta Technologies SL. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>carlos@hepta.es</authorEmail>
+    <authorUrl>https://extensions.hepta.es</authorUrl>
+    <version>3.5.0</version>
+    <description>PLG_READINGTIME_XML_DESCRIPTION</description>
+    <media destination="plg_content_readingtime" folder="media">
+        <folder>js</folder>
+        <folder>css</folder>
+    </media>
+    <files>
+        <filename plugin="readingtime">readingtime.php</filename>
+        <folder>tmpl</folder>
+        <filename>index.html</filename>
+    </files>
+    <languages folder="languages">
+        <language tag="ar-AA">ar-AA.plg_content_readingtime.ini</language>
+        <language tag="ar-AA">ar-AA.plg_content_readingtime.sys.ini</language>
+        <language tag="de-DE">de-DE.plg_content_readingtime.ini</language>
+        <language tag="de-DE">de-DE.plg_content_readingtime.sys.ini</language>
+        <language tag="en-GB">en-GB.plg_content_readingtime.ini</language>
+        <language tag="en-GB">en-GB.plg_content_readingtime.sys.ini</language>
+        <language tag="es-ES">es-ES.plg_content_readingtime.ini</language>
+        <language tag="es-ES">es-ES.plg_content_readingtime.sys.ini</language>
+        <language tag="nl-NL">nl-NL.plg_content_readingtime.ini</language>
+        <language tag="nl-NL">nl-NL.plg_content_readingtime.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params" >
+            <fieldset name="basic">
+                    <field name="excludedcategories" multiple="true" extension="com_content" type="category" label="PLG_READINGTIME_CHOOSE_CATEGORY_LBL" description="PLG_READINGTIME_CHOOSE_CATEGORY_DSC" />
+                    <field name="default-style" type="radio" default="1" label="PLG_READINGTIME_DEFAULT_STYLING_LBL" description="PLG_READINGTIME_DEFAULT_STYLING_DSC">
+                            <option value="0">JNO</option>
+                            <option value="1">JYES</option>
+                    </field>
+                    <field name="custom-style" type="textarea" default="" label="PLG_READINGTIME_CUSTOM_STYLE_LBL" description="PLG_READINGTIME_CUSTOM_STYLE_DSC" />
+                    <field name="hideoutput" type="radio" default="0" label="PLG_READINGTIME_HIDE_OUTPUT_LBL" description="PLG_READINGTIME_HIDE_OUTPUT_DSC">
+                            <option value="0">JNO</option>
+                            <option value="1">JYES</option>
+                    </field>
+                    <field name="layout" type="filelist" default="" label="PLG_READINGTIME_OPTIONS_CHOOSE_LAYOUT_LBL" description="PLG_READINGTIME_OPTIONS_CHOOSE_LAYOUT_DESC" directory="/plugins/content/readingtime/tmpl/" filter="" exclude="" stripext="" />
+            </fieldset>
+            <fieldset name="reading_progress_indicator">
+                    <field name="showindicator" type="radio" default="1" label="PLG_READINGTIME_SHOW_INDICATOR_LABEL" description="PLG_READINGTIME_SHOW_INDICATOR_DESCRIPTION">
+                            <option value="0">JNO</option>
+                            <option value="1">JYES</option>
+                    </field>
+                    <field name="bar_indicator_type" type="list"
+                        label="PLG_READINGTIME_BAR_INDICATOR_TYPE_LABEL"
+                        description="PLG_READINGTIME_BAR_INDICATOR_TYPE_DESCRIPTION"
+                        default="boostrap2"
+                        showon="showindicator:1"
+                        >
+                        <option value="">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_HTML5</option>
+                        <option value="bootstrap2">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_BOOTSTRAP2</option>
+                        <option value="bootstrap3">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_BOOTSTRAP3</option>
+                        <option value="uikit2">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_UIKIT2</option>
+                    </field>
+                    <field name="showindicatorlabel" type="radio"
+                        default="1"
+                        label="PLG_READINGTIME_SHOW_INDICATOR_LABEL_LABEL"
+                        description="PLG_READINGTIME_SHOW_INDICATOR_LABEL_DESCRIPTION"
+                        showon="bar_indicator_type:bootstrap2[OR]bar_indicator_type:bootstrap3[OR]bar_indicator_type:uikit2"
+                    >
+                            <option value="0">JNO</option>
+                            <option value="1">JYES</option>
+                    </field>
+                    <field name="bar_indicator_context" type="list"
+                        label="PLG_READINGTIME_BAR_INDICATOR_CONTEXT_LABEL"
+                        description="PLG_READINGTIME_BAR_INDICATOR_CONTEXT_DESCRIPTION"
+                        default=""
+                        showon="bar_indicator_type:bootstrap2[OR]bar_indicator_type:bootstrap3[OR]bar_indicator_type:uikit2"
+                        >
+                        <option value="">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_NONE</option>
+                        <option value="info">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_INFO</option>
+                        <option value="success">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_SUCCESS</option>
+                        <option value="warning">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_WARNING</option>
+                        <option value="danger">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_DANGER</option>
+                    </field>
+                    <field name="bar_indicator_striped" type="radio"
+                        default="0"
+                        label="PLG_READINGTIME_BAR_INDICATOR_STRIPED_LABEL"
+                        description="PLG_READINGTIME_BAR_INDICATOR_STRIPED_DESCRIPTION"
+                        showon="bar_indicator_type:bootstrap2[OR]bar_indicator_type:bootstrap3[OR]bar_indicator_type:uikit2"
+                    >
+                            <option value="0">JNO</option>
+                            <option value="1">JYES</option>
+                    </field>
+                    <field name="bar_indicator_animated" type="radio"
+                        default="0"
+                        label="PLG_READINGTIME_BAR_INDICATOR_ANIMATED_LABEL"
+                        description="PLG_READINGTIME_BAR_INDICATOR_ANIMATED_DESCRIPTION"
+                        showon="bar_indicator_type:bootstrap2[OR]bar_indicator_type:bootstrap3[OR]bar_indicator_type:uikit2"
+                    >
+                            <option value="0">JNO</option>
+                            <option value="1">JYES</option>
+                    </field>
+            </fieldset>
+            <fieldset name="PLG_READINGTIME_OPTIONS_READINGTIME">
+                    <field name="slow-reader" type="number" label="PLG_READINGTIME_OPTIONS_SLOW_READER_LBL" description="PLG_READINGTIME_OPTIONS_SLOW_READER_DSC" default="200" />
+                    <field name="fast-reader" type="number" label="PLG_READINGTIME_OPTIONS_FAST_READER_LBL" description="PLG_READINGTIME_OPTIONS_FAST_READER_DSC" default="400" />
+            </fieldset>
+        </fields>
+    </config>
 </extension>
