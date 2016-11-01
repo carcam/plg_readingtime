@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.0] - 2016-11-01
+### Added
+- Added Reading Progress Bar feature. Thanks to Luis Orozco @luisorozoli
+
 ## [3.4.3] - 2015-09-03
 ### Added
 - Up to date Dutch translation. Lots of thanks to Wouter!!!
