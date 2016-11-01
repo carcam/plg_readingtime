@@ -60,12 +60,22 @@
                         <option value="bootstrap3">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_BOOTSTRAP3</option>
                         <option value="uikit2">PLG_READINGTIME_BAR_INDICATOR_TYPE_OPTION_UIKIT2</option>
                     </field>
+                    <field name="showindicatorlabel" type="radio"
+                        default="1"
+                        label="PLG_READINGTIME_SHOW_INDICATOR_LABEL_LABEL"
+                        description="PLG_READINGTIME_SHOW_INDICATOR_LABEL_DESCRIPTION"
+                        showon="bar_indicator_type:bootstrap2[OR]bar_indicator_type:bootstrap3[OR]bar_indicator_type:uikit2"
+                    >
+                            <option value="0">JNO</option>
+                            <option value="1">JYES</option>
+                    </field>
                     <field name="bar_indicator_context" type="list"
                         label="PLG_READINGTIME_BAR_INDICATOR_CONTEXT_LABEL"
                         description="PLG_READINGTIME_BAR_INDICATOR_CONTEXT_DESCRIPTION"
-                        default="info"
+                        default=""
                         showon="bar_indicator_type:bootstrap2[OR]bar_indicator_type:bootstrap3[OR]bar_indicator_type:uikit2"
                         >
+                        <option value="">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_NONE</option>
                         <option value="info">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_INFO</option>
                         <option value="success">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_SUCCESS</option>
                         <option value="warning">PLG_READINGTIME_BAR_INDICATOR_CONTEXT_OPTION_WARNING</option>

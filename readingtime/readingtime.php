@@ -105,16 +105,17 @@ class plgContentReadingtime extends JPlugin
                 $indicatorType = $this->params->get('bar_indicator_type','');
 
                 if ($indicatorType){
-                    $displayData[] = $this->params->get('bar_indicator_context','info');
-                    $displayData[] = ($this->params->get('bar_indicator_striped','0'))?'striped':'';
-                    $displayData[] = ($this->params->get('bar_indicator_animated','0'))?' active':'';
+                    $indicatorBarContext = $this->params->get('bar_indicator_context','');
+                    $indicatorBarStriped = ($this->params->get('bar_indicator_striped','0'))?'striped':'';
+                    $indicatorBarAnimated = ($this->params->get('bar_indicator_animated','0'))?' active':'';
+                    $indicatorLabel = $this->params->get('showindicatorlabel','0');
                 }
 
 
                 $layout = new JLayoutFile('progressbar', null, array('debug'=>false,'suffixes'=>array($indicatorType)));
                 $layout->addIncludePaths(JPATH_PLUGINS . '/content/readingtime/layouts');
 
-                $row->text = $layout->render($displayData) . '<span id="ert-start"></span>' . $row->text;
+                $row->text = $layout->render(compact('indicatorBarContext','indicatorBarStriped','indicatorBarAnimated','indicatorLabel')) . '<span id="ert-start"></span>' . $row->text;
             }
         }
         return;

@@ -7,7 +7,27 @@
  */
 
 defined('_JEXEC') or die;
+
+extract($displayData);
+
+$classes = array();
+if($indicatorBarContext){
+    $classes[] = 'uk-progress-' . $indicatorBarContext;
+}
+if($indicatorBarAnimated){
+    $classes[] = 'uk-active';
+}
+if($indicatorBarStriped){
+    $classes[] = 'uk-progress-' . $indicatorBarStriped;
+}
+
 ?>
-<div class="ert-progress uk-progress">
+<div class="ert-progress uk-progress <?php echo implode (' ', $classes);?>">
     <div class="ert-progress-bar uk-progress-bar"></div>
+    <?php if ($indicatorLabel) :?>
+        <span class="ert-progress-label">
+            <?php echo JText::_('PLG_READINGTIME_PROGRESS_INDICATOR_LABEL');?>
+            <span class="ert-progress-percentage">0%</span>
+        </span>
+    <?php endif; ?>
 </div>
