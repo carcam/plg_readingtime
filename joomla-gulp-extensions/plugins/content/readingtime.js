@@ -28,6 +28,13 @@ gulp.task('scripts:' + baseTask, function () {
 		.pipe(gulp.dest(mediaPath + '/js'))
 });
 
+// Build Package
+gulp.task('build:' + baseTask, function () {
+	return gulp.src( extPath + '/*')
+				.pipe(zip('plg_readingtime.zip'))
+				.pipe(gulp.dest(extPath + '/../'));
+});
+
 // Watch
 gulp.task('watch:' + baseTask,
 	[
