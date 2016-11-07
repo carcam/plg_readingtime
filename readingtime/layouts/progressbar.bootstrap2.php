@@ -12,18 +12,18 @@ extract($displayData);
 
 $classes = array();
 if($indicatorBarContext){
-    $classes[] = 'progress-' . $indicatorBarContext;
+    $barClasses[] = 'bar-' . $indicatorBarContext;
 }
 if($indicatorBarAnimated){
-    $classes[] = 'progress-' . $indicatorBarAnimated;
+    $classes[] = 'active';
 }
 if($indicatorBarStriped){
-    $classes[] = 'progress-' . $indicatorBarStriped;
+    $classes[] = 'progress-striped';
 }
 
 ?>
 <div class="ert-progress progress <?php echo implode (' ', $classes);?>">
-    <div class="ert-progress-bar bar"></div>
+    <div class="ert-progress-bar bar <?php echo implode (' ', $barClasses);?>"></div>
     <?php if ($indicatorLabel) :?>
         <span class="ert-progress-label">
             <?php echo JText::_('PLG_READINGTIME_PROGRESS_INDICATOR_LABEL');?>

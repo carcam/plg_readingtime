@@ -18,7 +18,7 @@ if($indicatorBarAnimated){
     $classes[] = 'active';
 }
 if($indicatorBarStriped){
-    $classes[] = 'progress-bar-' . $indicatorBarStriped;
+    $classes[] = 'progress-bar-striped';
 }
 
 ?>
