@@ -10,8 +10,8 @@
     <version>3.5.0</version>
     <description>PLG_READINGTIME_XML_DESCRIPTION</description>
     <updateservers>
-		<server type="extension" priority="1" name="Estimated Reading Time">https://extensions.hepta.es/index.php?option=com_ars&amp;view=update&amp;task=stream&amp;format=xml&amp;id=1&amp;dummy.xml</server>
-	</updateservers>
+        <server type="extension" priority="1" name="Estimated Reading Time">https://extensions.hepta.es/index.php?option=com_ars&amp;view=update&amp;task=stream&amp;format=xml&amp;id=1&amp;dummy.xml</server>
+    </updateservers>
     <media destination="plg_content_readingtime" folder="media">
         <folder>js</folder>
         <folder>css</folder>
@@ -19,6 +19,7 @@
     <files>
         <filename plugin="readingtime">readingtime.php</filename>
         <folder>tmpl</folder>
+        <folder>layouts</folder>
         <filename>index.html</filename>
     </files>
     <languages folder="languages">
