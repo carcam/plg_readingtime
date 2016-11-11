@@ -2,9 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.1] - 2016-11-11
+### Added
+- Word Count for Template overrides (Check documentation: https://extensions.hepta.es/estimated-reading-time/documentation#overrides)
+
+### Fixed
+- Updated Dutch translation. Lots of thanks to Wouter!!!
+- Updated French translation. Lots of thanks to Marc-Antoine Thevenet!!!
+- Updated Spanish translation
+- Typo in english string. Thanks to Wouter and Marc-Antoine!!
+
 ## [3.5.0] - 2016-11-04
 ### Added
 - Added Reading Progress Bar feature. Thanks to Luis Orozco @luisorozoli
+- Added live update
 
 ## [3.4.3] - 2015-09-03
 ### Added
