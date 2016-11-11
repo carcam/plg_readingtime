@@ -33,10 +33,8 @@ class plgContentReadingtime extends JPlugin
             //Get Params
             $excludedCategories = $this->params->def('excludedcategories');
 
-            if($excludedCategories)
-            {
-                if(in_array($row->catid, $excludedCategories))
-                {
+            if($excludedCategories) {
+                if (($this->params->def( 'excludeincludecategories', '0')) === (in_array($row->catid, $excludedCategories))) {
                     return;
                 }
             }

@@ -37,7 +37,11 @@
     <config>
         <fields name="params" >
             <fieldset name="basic">
-                    <field name="excludedcategories" multiple="true" extension="com_content" type="category" label="PLG_READINGTIME_CHOOSE_CATEGORY_LBL" description="PLG_READINGTIME_CHOOSE_CATEGORY_DSC" />
+					<field name="excludeincludecategories" type="radio" default="0" label="PLG_READINGTIME_OPTIONS_EXCLUDE_INCLUDE_CATEGORIES_LABEL" description="PLG_READINGTIME_OPTIONS_EXCLUDE_INCLUDE_CATEGORIES_DESCRIPTION">
+                            <option value="0">PLG_READINGTIME_OPTIONS_EXCLUDE_CATEGORIES</option>
+                            <option value="1">PLG_READINGTIME_OPTIONS_INCLUDE_CATEGORIES</option>
+                    </field>
+                    <field name="excludedcategories" multiple="true" extension="com_content" type="category" label="PLG_READINGTIME_CHOSEN_CATEGORIES_LABEL" description="PLG_READINGTIME_CHOOSEN_CATEGORIES_DESCRIPTION" />
                     <field name="default-style" type="radio" default="1" label="PLG_READINGTIME_DEFAULT_STYLING_LBL" description="PLG_READINGTIME_DEFAULT_STYLING_DSC">
                             <option value="0">JNO</option>
                             <option value="1">JYES</option>
@@ -48,6 +52,8 @@
                             <option value="1">JYES</option>
                     </field>
                     <field name="layout" type="filelist" default="" label="PLG_READINGTIME_OPTIONS_CHOOSE_LAYOUT_LBL" description="PLG_READINGTIME_OPTIONS_CHOOSE_LAYOUT_DESC" directory="/plugins/content/readingtime/tmpl/" filter="" exclude="" stripext="" />
+                    <field name="slow-reader" type="number" label="PLG_READINGTIME_OPTIONS_SLOW_READER_LBL" description="PLG_READINGTIME_OPTIONS_SLOW_READER_DSC" default="200" />
+                    <field name="fast-reader" type="number" label="PLG_READINGTIME_OPTIONS_FAST_READER_LBL" description="PLG_READINGTIME_OPTIONS_FAST_READER_DSC" default="400" />
             </fieldset>
             <fieldset name="reading_progress_indicator">
                     <field name="showindicator" type="radio" default="1" label="PLG_READINGTIME_SHOW_INDICATOR_LABEL" description="PLG_READINGTIME_SHOW_INDICATOR_DESCRIPTION">
@@ -104,10 +110,6 @@
                             <option value="0">JNO</option>
                             <option value="1">JYES</option>
                     </field>
-            </fieldset>
-            <fieldset name="PLG_READINGTIME_OPTIONS_READINGTIME">
-                    <field name="slow-reader" type="number" label="PLG_READINGTIME_OPTIONS_SLOW_READER_LBL" description="PLG_READINGTIME_OPTIONS_SLOW_READER_DSC" default="200" />
-                    <field name="fast-reader" type="number" label="PLG_READINGTIME_OPTIONS_FAST_READER_LBL" description="PLG_READINGTIME_OPTIONS_FAST_READER_DSC" default="400" />
             </fieldset>
         </fields>
     </config>
