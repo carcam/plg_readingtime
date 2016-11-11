@@ -4,10 +4,10 @@
 ### 3.5.1
 * Update translations
 * Include new logo
-* Minimify CSS and JS
-* Gulpify process
 
 ### 3.5.2
+* Minimify CSS and JS
+* Gulpify process
 * Add option to include/choose categories 
 
 ## Ideas
