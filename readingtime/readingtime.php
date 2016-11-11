@@ -82,6 +82,7 @@ class plgContentReadingtime extends JPlugin
             $readingTimeData = new stdClass();
             $readingTimeData->slowtime = $slowTime;
             $readingTimeData->quicktime = $quickTime;
+            $readingTimeData->wordCount = $countWords;
             $readingTimeData->formattedtime = $html;
 
             $row->readingtime = $readingTimeData;
