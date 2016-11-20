@@ -33,17 +33,15 @@ class plgContentReadingtime extends JPlugin
             //Get Params
             $excludedCategories = $this->params->def('excludedcategories');
 
-            if($excludedCategories)
-            {
-                if(in_array($row->catid, $excludedCategories))
-                {
+            if($excludedCategories) {
+                if (($this->params->def( 'excludeincludecategories', '0')) === (in_array($row->catid, $excludedCategories))) {
                     return;
                 }
             }
 
             //Word per minute
-            $lowRate = 200;
-            $highRate = 400;
+            $lowRate = $this->params->def( 'slow-read', '200');
+            $highRate = $this->params->def( 'fast-read', '400');
 
             if(!isset($row->fulltext) && isset($row->id))
             {
@@ -73,8 +71,8 @@ class plgContentReadingtime extends JPlugin
                 $customStyle =$this->params->def( 'custom-style', '');
             }
 
-            //Render plugin
-            $path = JPluginHelper::getLayoutPath('content', 'readingtime');
+            ////Render plugin
+            $path = JPluginHelper::getLayoutPath('content', 'readingtime', str_replace(".php", "", $this->params->def( 'layout', '')));
             ob_start();
             include $path;
             $html = ob_get_clean();
