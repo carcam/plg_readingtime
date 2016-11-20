@@ -98,7 +98,7 @@ class plgContentReadingtime extends JPlugin
         if ($context == 'com_content.article'){
             if ($this->params->get('showindicator','0')) {
                 JHtml::_('jquery.framework');
-                JHtml::script('plg_content_readingtime/readingprogress.js', false, true);
+                JHtml::script('plg_content_readingtime/readingprogress.min.js', false, true);
                 JHtml::stylesheet('plg_content_readingtime/readingprogress.css', array(), true);
 
                 $indicatorType = $this->params->get('bar_indicator_type','');
