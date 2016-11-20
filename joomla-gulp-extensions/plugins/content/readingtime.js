@@ -8,13 +8,14 @@ var rename      = require('gulp-rename');
 var rm          = require('gulp-rimraf');
 var uglify      = require('gulp-uglify');
 var zip         = require('gulp-zip');
+var runSequence	= require('run-sequence');
 
 var baseTask  = 'plugins.content.readingtime';
 var extPath   = './readingtime';
 var mediaPath = extPath + '/media';
 
 // Compile scripts
-gulp.task('scripts:' + baseTask, function () {
+gulp.task('minimize:' + baseTask, function () {
 	return gulp.src([
 			mediaPath + '/js/**/*.js',
 			'!' + mediaPath + '/js/**/*.min.js',
@@ -29,11 +30,25 @@ gulp.task('scripts:' + baseTask, function () {
 });
 
 // Build Package
-gulp.task('build:' + baseTask, function () {
-	return gulp.src( extPath + '/*')
+gulp.task('zip:' + baseTask, function () {
+	return gulp.src( extPath + '/**')
 				.pipe(zip('plg_readingtime.zip'))
-				.pipe(gulp.dest(extPath + '/../'));
+				.pipe(gulp.dest(extPath + '/../releases'));
 });
+
+gulp.task('release:' + baseTask, function (callback) {
+	runSequence(
+		'minimize:' + baseTask,
+		'zip:' + baseTask,
+		function (error) {
+			if (error) {
+				console.log(error.message);
+			} else {
+				console.log('RELEASE FINISHED SUCCESSFULLY');
+			}
+			callback(error);
+		});
+}); 
 
 // Watch
 gulp.task('watch:' + baseTask,

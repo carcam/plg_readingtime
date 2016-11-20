@@ -1,5 +1,5 @@
 {
-	"wwwDir"           : "/var/www/jcms3x",
+	"wwwDir"           : "/var/www/ert",
 	"browserConfig" : {
 		"proxy": "localhost"
 	},
