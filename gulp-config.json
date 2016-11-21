@@ -1,0 +1,7 @@
+{
+	"wwwDir"           : "/var/www/ert",
+	"browserConfig" : {
+		"proxy": "localhost"
+	},
+	"defaultTasks"     : ["watch"]
+}
