@@ -36,6 +36,15 @@ Thumbs.db
 /.idea
 .idea
 
+# Build config
+gulp-config.json
+node_modules
+releases
+
+# Composer
+vendor/
+composer.lock
+
 # Tests #
 #########
 /tests/coverage

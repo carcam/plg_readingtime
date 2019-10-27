@@ -1,6 +1,6 @@
 <?php
 /**
- * @author	  Carlos M. Cámara
+ * @author	  Carlos M. Cámara <carlos@hepta.es>
  * @copyright   Copyright (C) 2012-2016 Hepta Technologies SL. All rights reserved.
  * @url		 https://extensions.hepta.es
  * @license	 GNU General Public License version 2 or later; see LICENSE.txt
@@ -8,11 +8,13 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Plugin\CMSPlugin;
+
 /**
  * ERT plugin.
  * @since 1.0.0
  */
-class PlgContentReadingtime extends JPlugin
+class PlgContentReadingtime extends CMSPlugin
 {
 	/**
 	 * Load the language file on instantiation.
@@ -22,6 +24,15 @@ class PlgContentReadingtime extends JPlugin
 	 */
 	protected $autoloadLanguage = true;
 
+	/**
+	 * Get content words and calculate reading time
+	 * @param	$context	String	Context of the application
+	 * @param	&row		Object	Row object
+	 * @param	$params		Registry	Plugin parameters
+	 * @param	$page		Int		Page
+	 *
+	 * @return	String
+	 */
 	public function onContentBeforeDisplay($context, &$row, &$params, $page=0)
 	{
 		if ($context == 'com_content.article' || $context == 'com_content.featured' || $context == 'com_content.category')

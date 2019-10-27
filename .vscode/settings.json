@@ -1,0 +1,4 @@
+{
+    "phpcs.showSources": true,
+    "phpcs.standard": "/Users/carcam/code/joomla/coding-standards/Joomla"
+}
