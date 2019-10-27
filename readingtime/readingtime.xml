@@ -52,19 +52,6 @@
                     </field>
             </fieldset>
             <fieldset name="reading_progress_indicator">
-                    <field name="progress_indicator-behaviour-excludedcategories" type="radio" default="0" label="PLG_READINGTIME_HIDE_OUTPUT_LBL" description="PLG_READINGTIME_HIDE_OUTPUT_DSC">
-                            <option value="0">PLG_READINGTIME_PROGRESS_INDICATOR_BEHAVIOUR_EXCLUDED_CATEGORIES_SAME</option>
-                            <option value="1">PLG_READINGTIME_PROGRESS_INDICATOR_BEHAVIOUR_EXCLUDED_CHOOSE_CATEGORIES</option>
-                    </field>
-                    <field
-                        name="progress_indicator-excludedcategories"
-                        multiple="true"
-                        extension="com_content"
-                        type="category"
-                        label="PLG_READINGTIME_CHOOSE_CATEGORY_LBL"
-                        description="PLG_READINGTIME_CHOOSE_CATEGORY_DSC"
-                        showon="progress_indicator-behaviour-excludedcategories:0"
-                        />
                     <field name="showindicator" type="radio" default="1" label="PLG_READINGTIME_SHOW_INDICATOR_LABEL" description="PLG_READINGTIME_SHOW_INDICATOR_DESCRIPTION">
                             <option value="0">JNO</option>
                             <option value="1">JYES</option>
