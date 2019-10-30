@@ -36,6 +36,10 @@ Thumbs.db
 /.idea
 .idea
 
+# Composer #
+############
+vendor
+
 # Tests #
 #########
 /tests/coverage
@@ -45,3 +49,4 @@ phpunit.xml
 #################
 build/ftp.build.properties
 build/paths.build.properties
+composer.lock

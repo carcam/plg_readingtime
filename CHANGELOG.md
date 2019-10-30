@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.3] - 2019-10-30
+
+### Added
+- Italian language - Grazie mile [tecnico10](https://github.com/tecnico10)!!
+
 ## [3.5.2] - 2018-06-18
 
 ### Fixed
