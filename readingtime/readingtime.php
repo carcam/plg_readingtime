@@ -8,12 +8,23 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Plugin\PluginHelper;
+
 /**
  * ERT plugin.
  * @since 1.0.0
  */
-class PlgContentReadingtime extends JPlugin
+class PlgContentReadingtime extends CMSPlugin
 {
+	/**
+	 * The database object
+	 *
+	 * @var JDatabaseInterface
+	 */
+	protected $db;
+
 	/**
 	 * Load the language file on instantiation.
 	 *
@@ -22,114 +33,119 @@ class PlgContentReadingtime extends JPlugin
 	 */
 	protected $autoloadLanguage = true;
 
+	/**
+	 * Words per minutes for a slow reader
+	 *
+	 * @var integer
+	 */
+	protected $lowRate = 200;
+
+	/**
+	 * Words per minutes for a fast reader
+	 *
+	 * @var int
+	 */
+	protected $highRate = 400;
+
 	public function onContentBeforeDisplay($context, &$row, &$params, $page=0)
 	{
-		if ($context == 'com_content.article' || $context == 'com_content.featured' || $context == 'com_content.category')
+		if (!in_array($context, array('com_content.article', 'com_content.featured', 'com_content.category')))
 		{
-			$html = '';
-
-			// Get Params
-			$excludedCategories = $this->params->def('excludedcategories');
-
-			if ($excludedCategories)
-			{
-				if (in_array($row->catid, $excludedCategories))
-				{
-					return;
-				}
-			}
-
-			// Word per minute
-			$lowRate = 200;
-			$highRate = 400;
-
-			if (!isset($row->fulltext) && isset($row->id))
-			{
-				$db = JFactory::getDbo();
-				$query = "SELECT `fulltext` FROM #__content WHERE id=" . $row->id;
-				$db->setQuery($query);
-				$fullText = $db->loadResult();
-
-				$fullArticle = $row->introtext . " " . $fullText;
-			}
-			else
-			{
-				$fullArticle = $row->introtext . " " . $row->fulltext;
-			}
-
-			if (!function_exists('mb_str_word_count'))
-			{
-				include dirname(__FILE__) . '/libraries/string.php';
-			}
-
-			$countWords = mb_str_word_count(strip_tags($fullArticle));
-
-			$slowTime = ceil($countWords / $lowRate);
-			$quickTime = ceil($countWords / $highRate);
-
-			if ($this->params->def('default-style', '1'))
-			{
-				$customStyle = "font-weight:bold;";
-			}
-			else
-			{
-				$customStyle = $this->params->def('custom-style', '');
-			}
-
-			// Render plugin
-			$path = JPluginHelper::getLayoutPath('content', 'readingtime');
-			ob_start();
-			include $path;
-			$html = ob_get_clean();
-
-			$readingTimeData = new stdClass;
-			$readingTimeData->slowtime = $slowTime;
-			$readingTimeData->quicktime = $quickTime;
-			$readingTimeData->wordCount = $countWords;
-			$readingTimeData->formattedtime = $html;
-
-			$row->readingtime = $readingTimeData;
-
-			if (!$this->params->def('hideoutput', '0'))
-			{
-				return $html;
-			}
+			return;
 		}
 
-		return;
+		$excludedCategories = $this->params->get('excludedcategories', array());
+
+		if ($excludedCategories && in_array($row->catid, $excludedCategories))
+		{
+			return;
+		}
+
+		if (!isset($row->fulltext) && isset($row->id))
+		{
+			$query = $this->db->getQuery(true);
+
+			$query	->select($query->qn('fulltext'))
+					->from($query->qn('#__content'))
+					->where($query->qn('id') . ' = ' . (int) $row->id);
+
+			$fullText = $this->db->setQuery($query)->loadResult();
+
+			$fullArticle = $row->introtext . " " . $fullText;
+		}
+		else
+		{
+			$fullArticle = $row->introtext . " " . $row->fulltext;
+		}
+
+		if (!function_exists('mb_str_word_count'))
+		{
+			require_once dirname(__FILE__) . '/libraries/string.php';
+		}
+
+		$countWords = mb_str_word_count(strip_tags($fullArticle));
+
+		$slowTime = ceil($countWords / $this->lowRate);
+		$quickTime = ceil($countWords / $this->highRate);
+
+		if ($this->params->def('default-style', '1'))
+		{
+			$customStyle = "font-weight:bold;";
+		}
+		else
+		{
+			$customStyle = $this->params->def('custom-style', '');
+		}
+
+		// Render plugin
+		$path = PluginHelper::getLayoutPath('content', 'readingtime');
+
+		ob_start();
+		include $path;
+		$html = ob_get_clean();
+
+		$readingTimeData = new stdClass;
+
+		$readingTimeData->slowtime = $slowTime;
+		$readingTimeData->quicktime = $quickTime;
+		$readingTimeData->wordCount = $countWords;
+		$readingTimeData->formattedtime = $html;
+
+		$row->readingtime = $readingTimeData;
+
+		if (!$this->params->def('hideoutput', '0'))
+		{
+			return $html;
+		}
 	}
 
 	public function onContentPrepare($context, &$row, &$params, $page=0)
 	{
-		if ($context == 'com_content.article')
+		if ($context !== 'com_content.article' || !$this->params->get('showindicator', '0'))
 		{
-			if ($this->params->get('showindicator', '0'))
-			{
-				JHtml::_('jquery.framework');
-				JHtml::script('plg_content_readingtime/readingprogress.js', false, true);
-				JHtml::stylesheet('plg_content_readingtime/readingprogress.css', array(), true);
-
-				$indicatorType = $this->params->get('bar_indicator_type', '');
-
-				if ($indicatorType)
-				{
-					$indicatorBarContext = $this->params->get('bar_indicator_context', '');
-					$indicatorBarStriped = ($this->params->get('bar_indicator_striped', '0')) ? 'striped' : '';
-					$indicatorBarAnimated = ($this->params->get('bar_indicator_animated', '0')) ? ' active' : '';
-					$indicatorLabel = $this->params->get('showindicatorlabel', '0');
-				}
-
-				$layout = new JLayoutFile('progressbar', null, array('debug' => false, 'suffixes' => array($indicatorType)));
-				$layout->addIncludePaths(JPATH_PLUGINS . '/content/readingtime/layouts');
-
-				$row->text = $layout->render(
-					compact('indicatorBarContext', 'indicatorBarStriped', 'indicatorBarAnimated', 'indicatorLabel')
-				)
-					. '<span id="ert-start"></span>' . $row->text;
-			}
+			return;
 		}
 
-		return;
-	}
+		HTMLHelper::_('jquery.framework');
+		HTMLHelper::_('script', 'plg_content_readingtime/readingprogress.js', false, true);
+		HTMLHelper::_('stylesheet', 'plg_content_readingtime/readingprogress.css', array(), true);
 
+		$indicatorType = $this->params->get('bar_indicator_type', '');
+
+		if ($indicatorType)
+		{
+			$indicatorBarContext  = $this->params->get('bar_indicator_context', '');
+			$indicatorBarStriped  = ($this->params->get('bar_indicator_striped', '0')) ? 'striped' : '';
+			$indicatorBarAnimated = ($this->params->get('bar_indicator_animated', '0')) ? ' active' : '';
+			$indicatorLabel       = $this->params->get('showindicatorlabel', '0');
+		}
+
+		$layout = new JLayoutFile('progressbar', null, array('debug' => false, 'suffixes' => array($indicatorType)));
+		$layout->addIncludePaths(JPATH_PLUGINS . '/content/readingtime/layouts');
+
+		$row->text = $layout->render(
+			compact('indicatorBarContext', 'indicatorBarStriped', 'indicatorBarAnimated', 'indicatorLabel')
+		)
+			. '<span id="ert-start"></span>' . $row->text;
+	}
 }

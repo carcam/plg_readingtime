@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
+
 if ($quickTime !== $slowTime)
 {
     $formattedTime = $quickTime . " - " . $slowTime;
@@ -19,5 +21,5 @@ else
 ?>
 
 <div class="reading-time" style="<?php echo $customStyle; ?>">
-    (<?php echo JText::_('PLG_READINGTIME_LABEL'); ?>: <?php echo $formattedTime . " " . JText::plural('PLG_READINGTIME_N_MINUTES', $slowTime ) ?>)
+    (<?php echo Text::_('PLG_READINGTIME_LABEL'); ?>: <?php echo $formattedTime . " " . Text::plural('PLG_READINGTIME_N_MINUTES', $slowTime ) ?>)
 </div>
