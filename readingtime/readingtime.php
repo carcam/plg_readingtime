@@ -34,17 +34,29 @@ class PlgContentReadingtime extends JPlugin
 	 */
 	public function onContentBeforeDisplay($context, &$row, &$params, $page=0)
 	{
-		$permittedContext = array('com_content.category', 'com_content.featured', 'com_content.article', 'com_k2.itemlist', 'com_k2.item');
+		$k2PermittedContext = array('com_k2.itemlist', 'com_k2.item');
+		$contentPermittedContext = array('com_content.category', 'com_content.featured', 'com_content.article');
+
+		$permittedContext = array_merge($k2PermittedContext, $contentPermittedContext);
 
 		if (in_array($context, $permittedContext))
 		{
 			$html = '';
 
 			// Get Params
-			$excludedCategories = $this->params->def('excludedcategories');
-
-			if ($excludedCategories)
+			if (in_array($context, $k2PermittedContext))
 			{
+				$excludedCategories = $this->params->def('k2excludedcategories', array());
+
+				if (in_array($row->catid, $excludedCategories))
+				{
+					return '';
+				}
+			}
+			else
+			{
+				$excludedCategories = $this->params->def('excludedcategories', array());
+
 				if (in_array($row->catid, $excludedCategories))
 				{
 					return '';
