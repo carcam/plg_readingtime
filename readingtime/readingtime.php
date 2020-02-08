@@ -1,7 +1,7 @@
 <?php
 /**
- * @author	  Carlos M. Cámara
- * @copyright   Copyright (C) 2012-2016 Hepta Technologies SL. All rights reserved.
+ * @author	  Carlos Cámara <carlos@hepta.es>
+ * @copyright Copyright (C) 2012-2020 Hepta Technologies SL. All rights reserved.
  * @url		 https://extensions.hepta.es
  * @license	 GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -22,9 +22,21 @@ class PlgContentReadingtime extends JPlugin
 	 */
 	protected $autoloadLanguage = true;
 
+	/**
+	 * Prepare content before showing
+	 *
+	 * @param	string	$context	App context
+	 * @param	object	$row		Row object with article data
+	 * @param	object	$params		Params object
+	 * @param	int		$page		Page number
+	 *
+	 * @return	Data
+	 */
 	public function onContentBeforeDisplay($context, &$row, &$params, $page=0)
 	{
-		if ($context == 'com_content.article' || $context == 'com_content.featured' || $context == 'com_content.category')
+		$permittedContext = array('com_content.category', 'com_content.featured', 'com_content.article', 'com_k2.itemlist', 'com_k2.item');
+
+		if (in_array($context, $permittedContext))
 		{
 			$html = '';
 
@@ -35,7 +47,7 @@ class PlgContentReadingtime extends JPlugin
 			{
 				if (in_array($row->catid, $excludedCategories))
 				{
-					return;
+					return '';
 				}
 			}
 
@@ -99,6 +111,16 @@ class PlgContentReadingtime extends JPlugin
 		return;
 	}
 
+	/**
+	 * Prepare content
+	 *
+	 * @param	string	$context	App context
+	 * @param	object	$row		Row object with article data
+	 * @param	object	$params		Params object
+	 * @param	int		$page		Page number
+	 *
+	 * @return	void
+	 */
 	public function onContentPrepare($context, &$row, &$params, $page=0)
 	{
 		if ($context == 'com_content.article')
