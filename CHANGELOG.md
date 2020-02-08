@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.4] - 2019-12-12
+
+### Fixed
+- Release number not updated on install
+
 ## [3.5.3] - 2019-10-30
 
 ### Added
