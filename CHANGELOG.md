@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.6.0] - 2020-02-08
+
+### Added
+- Support for K2 items
+
 ## [3.5.4] - 2019-12-12
 
 ### Fixed
