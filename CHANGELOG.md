@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.6.1] - 2020-03-02
+
+### Added
+- Turkish Translation - Köp sag boluň Uğur Uygur!!
+
 ## [3.6.0] - 2020-02-08
 
 ### Added

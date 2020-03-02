@@ -37,6 +37,8 @@
         <language tag="nl-NL">nl-NL.plg_content_readingtime.sys.ini</language>
         <language tag="it-IT">it-IT.plg_content_readingtime.ini</language>
         <language tag="it-IT">it-IT.plg_content_readingtime.sys.ini</language>
+        <language tag="tr-TR">tr-TR.plg_content_readingtime.ini</language>
+        <language tag="tr-TR">tr-TR.plg_content_readingtime.sys.ini</language>
     </languages>
     <config>
         <fields name="params" >
