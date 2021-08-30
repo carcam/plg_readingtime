@@ -8,12 +8,25 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\HTML\HTMLHelper;
+
 /**
  * ERT plugin.
  * @since 1.0.0
  */
-class PlgContentReadingtime extends JPlugin
+class PlgContentReadingtime extends CMSPlugin
 {
+	/**
+	 * Application object.
+	 *
+	 * @var    JApplicationCms
+	 * @since  3.5
+	 */
+	protected $app;
+
 	/**
 	 * Load the language file on instantiation.
 	 *
@@ -69,7 +82,7 @@ class PlgContentReadingtime extends JPlugin
 
 			if (!isset($row->fulltext) && isset($row->id))
 			{
-				$db = JFactory::getDbo();
+				$db = Factory::getDbo();
 				$query = "SELECT `fulltext` FROM #__content WHERE id=" . $row->id;
 				$db->setQuery($query);
 				$fullText = $db->loadResult();
@@ -101,7 +114,7 @@ class PlgContentReadingtime extends JPlugin
 			}
 
 			// Render plugin
-			$path = JPluginHelper::getLayoutPath('content', 'readingtime');
+			$path = PluginHelper::getLayoutPath('content', 'readingtime');
 			ob_start();
 			include $path;
 			$html = ob_get_clean();
@@ -139,9 +152,10 @@ class PlgContentReadingtime extends JPlugin
 		{
 			if ($this->params->get('showindicator', '0'))
 			{
-				JHtml::_('jquery.framework');
-				JHtml::script('plg_content_readingtime/readingprogress.js', false, true);
-				JHtml::stylesheet('plg_content_readingtime/readingprogress.css', array(), true);
+				$wa = $this->app->getDocument()->getWebAssetManager();
+				$wa->useScript('jquery');
+				$wa->registerAndUseStyle('plg_content_readingtime', 'plg_content_readingtime/readingprogress.css');
+				$wa->registerAndUseScript('plg_content_readingtime', 'plg_content_readingtime/readingprogress.js');
 
 				$indicatorType = $this->params->get('bar_indicator_type', '');
 
