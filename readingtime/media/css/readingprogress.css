@@ -1,4 +1,3 @@
-
 .ert-progress {
     position: fixed;
     left: 0;
@@ -11,22 +10,23 @@
     border: none;
 
     /* Progress bar container for Firefox/IE10+ */
-    background-color: transparent;
+    background-color: #1B3254;
 
     /* Progress bar value for IE10+ */
     color: #1B3254;
 }
+
 /* Firefox progress color */
-progress.ert-progress::-moz-progress-bar{
+progress.ert-progress::-moz-progress-bar {
     background-color: #1B3254;
 }
 
 /* Chrome and Safari progress color */
-progress.ert-progress::-webkit-progress-value{
+progress.ert-progress::-webkit-progress-value {
     background-color: #1B3254;
 }
 
-.ert-progress-label{
+.ert-progress-label {
     position: fixed;
     top: -2px;
     left: 0;

@@ -8,12 +8,24 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Plugin\CMSPlugin;
+
 /**
  * ERT plugin.
  * @since 1.0.0
  */
-class PlgContentReadingtime extends JPlugin
+class PlgContentReadingtime extends CMSPlugin
 {
+	/**
+	 * Application object.
+	 *
+	 * @var    \Joomla\CMS\Application\CMSApplication
+	 * @since  4.0.0
+	 */
+	protected $app;
+
 	/**
 	 * Load the language file on instantiation.
 	 *
@@ -139,25 +151,23 @@ class PlgContentReadingtime extends JPlugin
 		{
 			if ($this->params->get('showindicator', '0'))
 			{
-				JHtml::_('jquery.framework');
+				//JHtml::_('jquery.framework');
 				JHtml::script('plg_content_readingtime/readingprogress.js', false, true);
 				JHtml::stylesheet('plg_content_readingtime/readingprogress.css', array(), true);
 
-				$indicatorType = $this->params->get('bar_indicator_type', '');
+				$this->app->getDocument()->getWebAssetManager()
+					->registerAndUseScript('plg_content_readingtime', 'plg_content_readingtime/readingprogress.js', ['version' => 'auto'], ['defer' => true])
+					->registerAndUseStyle('plg_content_readingtime', 'plg_content_readingtime/readingprogress.css', ['version' => 'auto']);
 
-				if ($indicatorType)
-				{
-					$indicatorBarContext = $this->params->get('bar_indicator_context', '');
-					$indicatorBarStriped = ($this->params->get('bar_indicator_striped', '0')) ? 'striped' : '';
-					$indicatorBarAnimated = ($this->params->get('bar_indicator_animated', '0')) ? ' active' : '';
-					$indicatorLabel = $this->params->get('showindicatorlabel', '0');
-				}
+				$indicatorLabel = $this->params->get('showindicatorlabel', '0');
+
+				$indicatorType = '';
 
 				$layout = new JLayoutFile('progressbar', null, array('debug' => false, 'suffixes' => array($indicatorType)));
 				$layout->addIncludePaths(JPATH_PLUGINS . '/content/readingtime/layouts');
 
 				$row->text = $layout->render(
-					compact('indicatorBarContext', 'indicatorBarStriped', 'indicatorBarAnimated', 'indicatorLabel')
+					compact('indicatorLabel')
 				)
 					. '<span id="ert-start"></span>' . $row->text;
 			}
