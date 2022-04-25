@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Layout\FileLayout;
 
 /**
  * ERT plugin.
@@ -147,29 +148,33 @@ class PlgContentReadingtime extends CMSPlugin
 	 */
 	public function onContentPrepare($context, &$row, &$params, $page=0)
 	{
-		if ($context == 'com_content.article')
-		{
-			if ($this->params->get('showindicator', '0'))
+		if($this->app->isClient('site')) {
+			if ($context == 'com_content.article')
 			{
-				//JHtml::_('jquery.framework');
-				JHtml::script('plg_content_readingtime/readingprogress.js', false, true);
-				JHtml::stylesheet('plg_content_readingtime/readingprogress.css', array(), true);
+				if ($this->params->get('showindicator', '0'))
+				{
+					if (version_compare(\Joomla\CMS\Version::getShortVersion(), "4.0") == -1) { 
+						JHtml::_('jquery.framework');
+						JHtml::script('plg_content_readingtime/readingprogress.js', false, true);
+						JHtml::stylesheet('plg_content_readingtime/readingprogress.css', array(), true);
+					} else { 
+						$this->app->getDocument()->getWebAssetManager()
+							->registerAndUseScript('plg_content_readingtime', 'plg_content_readingtime/readingprogress.js', ['version' => 'auto'], ['defer' => true])
+							->registerAndUseStyle('plg_content_readingtime', 'plg_content_readingtime/readingprogress.css', ['version' => 'auto']);
+					}
 
-				$this->app->getDocument()->getWebAssetManager()
-					->registerAndUseScript('plg_content_readingtime', 'plg_content_readingtime/readingprogress.js', ['version' => 'auto'], ['defer' => true])
-					->registerAndUseStyle('plg_content_readingtime', 'plg_content_readingtime/readingprogress.css', ['version' => 'auto']);
+					$indicatorLabel = $this->params->get('showindicatorlabel', '0');
 
-				$indicatorLabel = $this->params->get('showindicatorlabel', '0');
+					$indicatorType = '';
 
-				$indicatorType = '';
+					$layout = new FileLayout('progressbar', null, array('debug' => false, 'suffixes' => array($indicatorType)));
+					$layout->addIncludePaths(JPATH_PLUGINS . '/content/readingtime/layouts');
 
-				$layout = new JLayoutFile('progressbar', null, array('debug' => false, 'suffixes' => array($indicatorType)));
-				$layout->addIncludePaths(JPATH_PLUGINS . '/content/readingtime/layouts');
-
-				$row->text = $layout->render(
-					compact('indicatorLabel')
-				)
-					. '<span id="ert-start"></span>' . $row->text;
+					$row->text = $layout->render(
+						compact('indicatorLabel')
+					)
+						. '<span id="ert-start"></span>' . $row->text;
+				}
 			}
 		}
 

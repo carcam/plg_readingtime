@@ -26,7 +26,7 @@ progress.ert-progress::-webkit-progress-value {
     background-color: #1B3254;
 }
 
-.ert-progress-label {
+.ert-progress-container {
     position: fixed;
     top: -2px;
     left: 0;
@@ -34,4 +34,5 @@ progress.ert-progress::-webkit-progress-value {
     mix-blend-mode: hard-light;
     text-align: center;
     width: 100%;
+	z-index: 9999;
 }

@@ -7,5 +7,15 @@
  */
 
 defined('_JEXEC') or die;
+
+use \Joomla\CMS\Language\Text;
+
+extract($displayData);
 ?>
-<progress class="ert-progress" value="0"></progress>
+<div class="ert-progress">
+<?php if ($indicatorLabel) :?>
+    <label for="ert-progressbar"><?php echo Text::_('PLG_READINGTIME_PROGRESS_INDICATOR_LABEL');?> <span class="ert-progress-percentage">0%</span></label>
+<?php endif; ?>
+<progress id="ert-progressbar" class="ert-progress progress" max="100" value="0"></progress>
+</div>
+

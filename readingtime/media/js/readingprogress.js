@@ -22,8 +22,6 @@ document.addEventListener('scroll', function (e) {
         w = (topScroll) / ((start + end) - document.documentElement.clientHeight) * 100;
     }
 
-    readingProgress.style.setProperty('width', w + '%');
-
     readingProgress.value = w;
 });
 
