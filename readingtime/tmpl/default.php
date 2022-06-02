@@ -18,6 +18,6 @@ else
 }
 ?>
 
-<div class="reading-time" style="<?php echo $customStyle; ?>">
+<div class="reading-time">
     (<?php echo JText::_('PLG_READINGTIME_LABEL'); ?>: <?php echo $formattedTime . " " . JText::plural('PLG_READINGTIME_N_MINUTES', $slowTime ) ?>)
 </div>
