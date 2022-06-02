@@ -27,6 +27,8 @@ class PlgContentReadingtime extends CMSPlugin
 	 */
 	protected $app;
 
+	protected $joomlaVersion;
+
 	/**
 	 * Load the language file on instantiation.
 	 *
@@ -113,6 +115,12 @@ class PlgContentReadingtime extends CMSPlugin
 				$customStyle = $this->params->def('custom-style', '');
 			}
 
+			$customStyle = '.reading-time{' .$customStyle . '}';
+
+			$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+
+			$wa->addInlineStyle($customStyle);
+$customStyle = "";
 			// Render plugin
 			$path = JPluginHelper::getLayoutPath('content', 'readingtime');
 			ob_start();
@@ -148,13 +156,13 @@ class PlgContentReadingtime extends CMSPlugin
 	 */
 	public function onContentPrepare($context, &$row, &$params, $page=0)
 	{
+		$this->joomlaVersion = new \Joomla\CMS\Version();
 		if($this->app->isClient('site')) {
 			if ($context == 'com_content.article')
 			{
 				if ($this->params->get('showindicator', '0'))
 				{
-					if (version_compare(\Joomla\CMS\Version::getShortVersion(), "4.0") == -1) { 
-						JHtml::_('jquery.framework');
+					if (version_compare($this->joomlaVersion->getShortVersion(), "4.0") == -1) {
 						JHtml::script('plg_content_readingtime/readingprogress.js', false, true);
 						JHtml::stylesheet('plg_content_readingtime/readingprogress.css', array(), true);
 					} else { 
