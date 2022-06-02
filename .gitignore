@@ -10,6 +10,7 @@
 *.rar
 *.tar
 *.zip
+*.pdf
 
 # Logs and databases #
 ######################
@@ -39,6 +40,7 @@ Thumbs.db
 # Composer #
 ############
 vendor
+composer.lock
 
 # Tests #
 #########
@@ -49,4 +51,15 @@ phpunit.xml
 #################
 build/ftp.build.properties
 build/paths.build.properties
-composer.lock
+build/build
+
+# Gulp related #
+################
+config.json
+/vendor/
+node_modules
+
+# Visual code folder #
+######################
+.vscode
+
