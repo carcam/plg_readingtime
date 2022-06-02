@@ -14,12 +14,20 @@ document.addEventListener('scroll', function (e) {
     let end = parent.offsetHeight;
     let w = 0;
 
-    let topScroll = document.documentElement.scrollTop;
+    let currentPosition = document.documentElement.scrollTop;
 
-    let scrollHeight = document.documentElement.scrollHeight - end;
+    let scrollHeight = window.innerHeight;
 
-    if (topScroll > 0) {
-        w = (topScroll) / ((start + end) - document.documentElement.clientHeight) * 100;
+    let offset = 0;
+
+    if (start > scrollHeight) {
+        offset = Math.floor(start / scrollHeight);
+        start = start - (scrollHeight * offset / 3);
+    }
+
+    if (currentPosition > start) {
+        w = (currentPosition - start) / (end + (scrollHeight * offset / 2) - scrollHeight) * 100;
+        console.log(w);
     }
 
     readingProgress.value = w;

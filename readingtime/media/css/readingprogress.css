@@ -28,11 +28,17 @@ progress.ert-progress::-webkit-progress-value {
 
 .ert-progress-container {
     position: fixed;
-    top: -2px;
+    top: -4px;
     left: 0;
     color: #000000;
     mix-blend-mode: hard-light;
     text-align: center;
     width: 100%;
-	z-index: 9999;
+    z-index: 9999;
+}
+
+.ert-progress-container label {
+    position: relative;
+    z-index: 1;
+    mix-blend-mode: difference;
 }
