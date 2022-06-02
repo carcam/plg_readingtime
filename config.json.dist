@@ -1,0 +1,10 @@
+{
+  "sshData": {
+    "root": "src/",
+    "hostname": "HOST IN SSH/CONFIG",
+    "destination": "PAHT_TO_JOOMLA_ROOT"
+  },
+  "lando": {
+    "destination": ""
+  }
+}
