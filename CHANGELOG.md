@@ -2,6 +2,28 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0,.0] - 2021-06-03
+
+### Added
+
+- Compatibility with Joomla 4
+- Sponsor message
+
+### Fixed
+
+- Reading progress bar working correctly
+
+### Changed
+
+- Refactored options screen to make it easier to use
+- Refactored reading progress indicator logic
+- Custom styles moved to webassets and removed from inline
+
+### Removed
+
+- Removed layout options and everything unified in html5 layout
+
+
 ## [3.6.1] - 2020-07-01
 
 ### Fixed
