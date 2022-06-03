@@ -13,6 +13,9 @@ var reload = browserSync.reload;
 
 var rsync = require("gulp-rsync");
 const { del } = require("object-path");
+var fs = require("fs");
+//var cheerio = require('gulp-cheerio');
+var cheerio = require('cheerio');
 
 var files = [
   "src/_dev/css/**/*.css",
@@ -35,9 +38,14 @@ gulp.task("copy",
 );
 
 gulp.task("zip", function () {
+  var xml = fs.readFileSync('./temp/plugins/content/readingtime.xml');
+
+  var $ = cheerio.load(xml, { xmlMode: true });
+  var version   = $('version').text();
+
   return gulp
     .src(["temp/plugins/content/**"])
-    .pipe(zip("plg_content_readingtime.zip"))
+    .pipe(zip("plg_content_readingtime_" + version +".zip"))
     .pipe(gulp.dest("release"));
 });
 
