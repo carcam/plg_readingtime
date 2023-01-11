@@ -2,7 +2,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [4.0,.0] - 2021-06-03
+## [4.0.1] - 2023-01-11
+
+### Added
+
+- Slovenian translation - Najlepša hvala Ervin!!
+
+### Changed
+
+- Replaced old J3 classes with J4 namespaced
+
+### Fixed
+
+- Fixed reading time label color in the progress bar
+
+## [4.0.0] - 2021-06-03
 
 ### Added
 

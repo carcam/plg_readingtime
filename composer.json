@@ -1,0 +1,6 @@
+{
+    "require": {
+        "joomla/coding-standards": "~2.0@alpha",
+        "squizlabs/php_codesniffer": "2.8.1"
+    }
+}

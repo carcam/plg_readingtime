@@ -10,6 +10,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\HTML\HTMLHelper;
 
@@ -102,14 +103,15 @@ class PlgContentReadingtime extends CMSPlugin
                 $customStyle = $this->params->def('custom-style', '');
             }
 
-            $customStyle = '.reading-time{' .$customStyle . '}';
+            $customStyle = '.reading-time{' . $customStyle . '}';
 
             $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
 
             $wa->addInlineStyle($customStyle);
             $customStyle = "";
             // Render plugin
-            $path = JPluginHelper::getLayoutPath('content', 'readingtime');
+            $path = PluginHelper::getLayoutPath('content', 'readingtime');
+            
             ob_start();
             include $path;
             $html = ob_get_clean();

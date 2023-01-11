@@ -41,4 +41,5 @@ progress.ert-progress::-webkit-progress-value {
     position: relative;
     z-index: 1;
     mix-blend-mode: difference;
+    color: #fff;
 }
