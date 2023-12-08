@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.2] - 2023-12-08
+
+### Fixed
+
+- Support for Joomla 5 without compatibility plugin
+- Italian translation file format
+
+### Removed
+
+- Support for K2
+
 ## [4.0.1] - 2023-01-11
 
 ### Added
