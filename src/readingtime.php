@@ -50,33 +50,25 @@ class PlgContentReadingtime extends CMSPlugin
      */
     public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
     {
-        $k2PermittedContext = array('com_k2.itemlist', 'com_k2.item');
         $contentPermittedContext = array('com_content.category', 'com_content.featured', 'com_content.article');
 
-        $permittedContext = array_merge($k2PermittedContext, $contentPermittedContext);
+        $permittedContext = $contentPermittedContext;
 
         if (in_array($context, $permittedContext)) {
             $html = '';
 
             // Get Params
-            if (in_array($context, $k2PermittedContext)) {
-                $excludedCategories = $this->params->def('k2excludedcategories', array());
+            $excludedCategories = $this->params->def('excludedcategories', array());
 
-                if (in_array($row->catid, $excludedCategories)) {
-                    return '';
-                }
-            } else {
-                $excludedCategories = $this->params->def('excludedcategories', array());
-
-                if (in_array($row->catid, $excludedCategories)) {
-                    return '';
-                }
+            if (in_array($row->catid, $excludedCategories)) {
+                return '';
             }
 
             // Word per minute
             $lowRate = 200;
             $highRate = 400;
 
+            $fullArticle = $row->introtext . " " . $row->fulltext;
             if (!isset($row->fulltext) && isset($row->id)) {
                 $db = Factory::getDbo();
                 $query = "SELECT `fulltext` FROM #__content WHERE id=" . $row->id;
@@ -84,8 +76,6 @@ class PlgContentReadingtime extends CMSPlugin
                 $fullText = $db->loadResult();
 
                 $fullArticle = $row->introtext . " " . $fullText;
-            } else {
-                $fullArticle = $row->introtext . " " . $row->fulltext;
             }
 
             if (!function_exists('mb_str_word_count')) {
@@ -97,10 +87,10 @@ class PlgContentReadingtime extends CMSPlugin
             $slowTime = ceil($countWords / $lowRate);
             $quickTime = ceil($countWords / $highRate);
 
+            $customStyle = $this->params->def('custom-style', '');
+
             if ($this->params->def('default-style', '1')) {
                 $customStyle = "font-weight:bold;";
-            } else {
-                $customStyle = $this->params->def('custom-style', '');
             }
 
             $customStyle = '.reading-time{' . $customStyle . '}';
@@ -148,14 +138,9 @@ class PlgContentReadingtime extends CMSPlugin
         if ($this->app->isClient('site')) {
             if ($context == 'com_content.article') {
                 if ($this->params->get('showindicator', '0')) {
-                    if (version_compare($this->joomlaVersion->getShortVersion(), "4.0") == -1) {
-                        HTMLHelper::script('plg_content_readingtime/readingprogress.js', false, true);
-                        HTMLHelper::stylesheet('plg_content_readingtime/readingprogress.css', array(), true);
-                    } else {
-                        $this->app->getDocument()->getWebAssetManager()
-                            ->registerAndUseScript('plg_content_readingtime', 'plg_content_readingtime/readingprogress.js', ['version' => 'auto'], ['defer' => true])
-                            ->registerAndUseStyle('plg_content_readingtime', 'plg_content_readingtime/readingprogress.css', ['version' => 'auto']);
-                    }
+                    $this->app->getDocument()->getWebAssetManager()
+                        ->registerAndUseScript('plg_content_readingtime', 'plg_content_readingtime/readingprogress.js', ['version' => 'auto'], ['defer' => true])
+                        ->registerAndUseStyle('plg_content_readingtime', 'plg_content_readingtime/readingprogress.css', ['version' => 'auto']);
 
                     $indicatorLabel = $this->params->get('showindicatorlabel', '0');
 
