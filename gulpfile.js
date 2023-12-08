@@ -14,7 +14,6 @@ var reload = browserSync.reload;
 var rsync = require("gulp-rsync");
 const { del } = require("object-path");
 var fs = require("fs");
-//var cheerio = require('gulp-cheerio');
 var cheerio = require('cheerio');
 
 var joomlaFiles = [

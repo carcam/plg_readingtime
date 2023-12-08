@@ -1,6 +1,6 @@
 {
     "paths" : {
-        "testSite": "LOCAL PATH TO THE JOOMLA FOLDER"
+        "testSite": ""
     },
     "ftpData" : {
 		"host" : "",
@@ -11,14 +11,16 @@
     },
 	"sshData" : {
 		"test": {
-            "root": "src/",
-	        "hostname": "HOSTNAME IN SSH CONFIG",
-	        "destination": "PATH TO JOOMLA FOLDER IN REMOTE SERVER"
+			"hostname": "",
+			"port": ,
+			"user": "",
+			"destination": "
 		},
 		"production": {
-            "root": "src/",
-	        "hostname": "HOSTNAME IN SSH CONFIG",
-	        "destination": "PATH TO JOOMLA FOLDER IN REMOTE SERVER"
+			"hostname": "",
+			"port": 22,
+			"user": "",
+			"destination": ""
 		}
 	}
 }
