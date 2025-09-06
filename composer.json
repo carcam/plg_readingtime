@@ -1,6 +1,27 @@
 {
-    "require": {
-        "joomla/coding-standards": "~2.0@alpha",
-        "squizlabs/php_codesniffer": "2.8.1"
+    "name": "hepta/readingtime",
+    "description": "Hepta Estimated Reading Time Joomla Extension",
+    "type": "joomla-extension",
+    "license": "GPL-2.0-or-later",
+    "require-dev": {
+        "consolidation/robo": "^4.0",
+        "vlucas/phpdotenv": "^5.5",
+        "phpunit/phpunit": "^10.5",
+        "joomla/registry": "~4.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/plugins/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hepta\\Tests\\": "tests",
+            "Hepta\\Plugin\\Content\\ReadingTime\\": "src/plugins/content/plg_readingtime/src"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit",
+        "robo": "./vendor/bin/robo"
     }
 }

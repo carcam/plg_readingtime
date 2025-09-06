@@ -22,7 +22,6 @@
         <folder>languages</folder>
         <folder>layouts</folder>
         <folder>libraries</folder>
-        <filename>index.html</filename>
     </files>
     <languages folder="languages">
         <language tag="ar-AA">ar-AA.plg_content_readingtime.ini</language>
@@ -51,7 +50,7 @@
                     <field name="default-style" type="radio" default="1" label="PLG_READINGTIME_DEFAULT_STYLING_LBL" description="PLG_READINGTIME_DEFAULT_STYLING_DSC">
                             <option value="0">JNO</option>
                             <option value="1">JYES</option>
-                    </field>                    
+                    </field>
                     <field name="sponsor-features-message" type="note" class="alert alert-info" label="PLG_READINGTIME_SPONSOR_FEATURE_LABEL" description="PLG_READINGTIME_SPONSOR_FEATURE_DESCRIPTION" />
             </fieldset>
             <fieldset name="reading_progress_indicator">
@@ -66,7 +65,7 @@
                     >
                             <option value="0">JNO</option>
                             <option value="1">JYES</option>
-                    </field>                    
+                    </field>
             </fieldset>
             <fieldset name="advanced">
                     <field name="custom-style" type="textarea" default="" label="PLG_READINGTIME_CUSTOM_STYLE_LBL" description="PLG_READINGTIME_CUSTOM_STYLE_DSC" />

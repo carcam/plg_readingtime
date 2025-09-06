@@ -38,7 +38,7 @@ class RoboFile extends \Robo\Tasks
      */
     private function tmpDir(): string
     {
-        $tempDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'heptacalcom_robo_temp_' . uniqid();
+        $tempDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'plg_readingtime_robo_temp_' . uniqid();
         $this->_mkdir($tempDir);
         return $tempDir;
     }
@@ -63,7 +63,7 @@ class RoboFile extends \Robo\Tasks
 
         $this->say("Creating final package...");
 
-        $finalPackageName = 'pkg_heptacalcom';
+        $finalPackageName = 'pkg_readingtime';
         $finalPackageZip = self::BUILD . '/' . $finalPackageName . '.zip';
         $packageTask = $this->taskPack($finalPackageZip);
 
@@ -77,7 +77,7 @@ class RoboFile extends \Robo\Tasks
         }
 
         // Add the package manifest
-        $packageTask->addFile(self::SRC . '/pkg_heptacalcom.xml', 'pkg_heptacalcom.xml');
+        $packageTask->addFile(self::SRC . '/pkg_readingtime.xml', 'pkg_readingtime.xml');
 
         $packageTask->run();
 
@@ -89,7 +89,7 @@ class RoboFile extends \Robo\Tasks
      * Installs the extension to a local Joomla dev environment.
      *
      * @param string $type The type of extension to install (package, component, module, plugin). Defaults to package.
-     * @param string|null $name The name of the module or plugin to install (e.g. mod_heptacalcom_keywords_cloud).
+     * @param string|null $name The name of the module or plugin to install (e.g. mod_heptareadingtime_keywords_cloud).
      *
      * @throws \Robo\Exception\TaskException
      */
@@ -101,7 +101,7 @@ class RoboFile extends \Robo\Tasks
         switch ($type) {
             case 'package':
                 $this->package();
-                $zipPath = __DIR__ . '/' . self::BUILD . '/pkg_heptacalcom.zip';
+                $zipPath = __DIR__ . '/' . self::BUILD . '/pkg_readingtime.zip';
                 break;
             case 'component':
                 $zipPath = $this->packageComponent();
@@ -137,7 +137,7 @@ class RoboFile extends \Robo\Tasks
         $this->say("Running integration tests...");
 
         // First, install the plugin
-        $this->install('plugin', 'heptacalcom', 'content');
+        $this->install('plugin', 'readingtime', 'content');
 
         $this->say("Copying tests to ddev environment...");
 
@@ -177,12 +177,12 @@ class RoboFile extends \Robo\Tasks
     private function packageComponent(): string
     {
         $this->say("Packaging component...");
-        $componentName = 'com_heptacalcom';
+        $componentName = 'com_heptareadingtime';
         $componentPath = self::SRC . '/component';
         $buildDir = self::BUILD . '/' . $componentName;
 
         $fs = new Filesystem();
-        $tempDir = $this->tmpDir() . '/heptacalcom_component_temp';
+        $tempDir = $this->tmpDir() . '/heptareadingtime_component_temp';
         $this->_mkdir($tempDir);
 
         $finder = (new \Symfony\Component\Finder\Finder())
@@ -231,7 +231,7 @@ class RoboFile extends \Robo\Tasks
 
             $zipFile = self::BUILD . '/' . $moduleName . '.zip';
             $fs = new Filesystem();
-            $tempDir = $this->tmpDir() . '/heptacalcom_module_' . $moduleName . '_temp';
+            $tempDir = $this->tmpDir() . '/heptareadingtime_module_' . $moduleName . '_temp';
             $this->_mkdir($tempDir);
 
             $finder = (new \Symfony\Component\Finder\Finder())
@@ -282,7 +282,7 @@ class RoboFile extends \Robo\Tasks
 
             $zipFile = self::BUILD . '/' . $pluginName . '.zip';
             $fs = new Filesystem();
-            $tempDir = $this->tmpDir() . '/heptacalcom_plugin_' . $pluginName . '_temp';
+            $tempDir = $this->tmpDir() . '/heptareadingtime_plugin_' . $pluginName . '_temp';
             $this->_mkdir($tempDir);
 
             $finder = (new \Symfony\Component\Finder\Finder())
@@ -321,7 +321,7 @@ class RoboFile extends \Robo\Tasks
 
         $zipFile = self::BUILD . '/' . $name . '.zip';
         $fs = new Filesystem();
-        $tempDir = $this->tmpDir() . '/heptacalcom_single_module_' . $name . '_temp';
+        $tempDir = $this->tmpDir() . '/heptareadingtime_single_module_' . $name . '_temp';
         $this->_mkdir($tempDir);
 
         $finder = (new \Symfony\Component\Finder\Finder())
@@ -357,7 +357,7 @@ class RoboFile extends \Robo\Tasks
 
         $zipFile = self::BUILD . '/plg_' . $type . '_' . $name . '.zip';
         $fs = new Filesystem();
-        $tempDir = $this->tmpDir() . '/heptacalcom_single_plugin_' . $type . '_' . $name . '_temp';
+        $tempDir = $this->tmpDir() . '/heptareadingtime_single_plugin_' . $type . '_' . $name . '_temp';
         $this->_mkdir($tempDir);
 
         $finder = (new \Symfony\Component\Finder\Finder())
@@ -373,7 +373,7 @@ class RoboFile extends \Robo\Tasks
             }
 
             // The addDir method expects the directory name within the zip.
-            // This should be the full plugin folder name, e.g., 'plg_content_heptacalcom'
+            // This should be the full plugin folder name, e.g., 'plg_content_heptareadingtime'
             $this->taskPack($zipFile)->addDir('plg_' . $type . '_' . $name, $tempDir)->run();
             $this->taskDeleteDir($tempDir)->run();
 

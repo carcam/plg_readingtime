@@ -58,8 +58,19 @@ build/build
 config.json
 /vendor/
 node_modules
+.vscode/settings.json
+.env
 
-# Visual code folder #
-######################
-.vscode
+# Composer dependencies
+vendor
 
+# PHPUnit #
+###########
+.phpunit.result.cache
+
+# Testing #
+###########
+joomla
+
+# Build artifacts
+/build/package/
