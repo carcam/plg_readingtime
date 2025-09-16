@@ -44,7 +44,7 @@ class RoboFile extends \Robo\Tasks
     }
 
     /**
-     * Packages the entire Hepta Cal.com extension.
+     * Packages the entire extension.
      *
      * This task orchestrates the packaging of the component, modules, and plugins
      * into a single installable package for Joomla.
@@ -95,6 +95,11 @@ class RoboFile extends \Robo\Tasks
      */
     public function install($type = 'package', $name = null, $plugin_family = null)
     {
+        if (file_exists(__DIR__ . '/.env')) {
+            $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+            $dotenv->load();
+        }
+
         $this->clean();
         $zipPath = '';
 
@@ -169,6 +174,35 @@ class RoboFile extends \Robo\Tasks
         }
 
         $this->say("Integration tests passed.");
+    }
+
+    /**
+     * Runs end-to-end tests.
+     *
+     * @throws \Robo\Exception\TaskException
+     */
+    public function testE2e()
+    {
+        $this->say("Starting ddev environment...");
+        $this->taskExec('ddev start')->run();
+
+        $this->say("Running end-to-end tests...");
+
+        // First, install the plugin
+        $this->install('plugin', 'readingtime', 'content');
+
+        $this->say("Running Cypress tests...");
+
+        $result = $this->taskExec('ddev exec npx cypress run --spec "tests/e2e/integration/*.cy.js"')->run();
+
+        if (!$result->wasSuccessful()) {
+            throw new TaskException(
+                $this,
+                sprintf("Cypress tests failed with exit code %s.\nOutput:\n%s", $result->getExitCode(), $result->getMessage())
+            );
+        }
+
+        $this->say("Cypress tests passed.");
     }
 
     /**
@@ -393,7 +427,6 @@ class RoboFile extends \Robo\Tasks
                 throw new TaskException($this, "Joomla installation path not found or not set in .env file. Please set JOOMLA_PATH.");
             }
 
-            // 1. Copy the package to the DDEV temp directory
             $packageName = basename($packagePath);
             $tempDir = $joomlaPath . '/tmp';
             $this->_mkdir($tempDir);
@@ -414,8 +447,8 @@ class RoboFile extends \Robo\Tasks
             $inContainerPath = 'tmp/' . $packageName;
 
             $command = sprintf(
-                'ddev php joomla/cli/joomla.php extension:install --path=%s',
-                escapeshellarg('joomla/' . $inContainerPath)
+                'ddev php cli/joomla.php extension:install --path=%s',
+                escapeshellarg($inContainerPath)
             );
 
             $result = $this->taskExec($command)->run();
@@ -433,6 +466,8 @@ class RoboFile extends \Robo\Tasks
         private function cleanCache()
         {
             $joomlaPath = $_ENV['JOOMLA_PATH'] ?? '';
+
+            $joomlaPath = '.';
 
             if (empty($joomlaPath) || !is_dir($joomlaPath)) {
                 throw new TaskException($this, "Joomla installation path not found or not set in .env file. Please set JOOMLA_PATH.");

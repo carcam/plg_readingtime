@@ -1,0 +1,9 @@
+{
+  "e2e": {
+    "baseUrl": "https://readingtime.ddev.site"
+  },
+  "component": {
+    "componentFolder": "tests/e2e/components",
+    "testFiles": "**/*.spec.js"
+  }
+}

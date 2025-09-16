@@ -9,5 +9,11 @@
     "gulp-run": "^1.7.1",
     "gulp-zip": "^5.1.0",
     "object-path": "^0.11.8"
+  },
+  "devDependencies": {
+    "cypress": "^15.2.0"
+  },
+  "scripts": {
+    "test:e2e": "./vendor/bin/robo test:e2e"
   }
 }
