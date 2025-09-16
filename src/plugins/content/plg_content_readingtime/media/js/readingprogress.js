@@ -10,6 +10,7 @@ const readingProgress = document.querySelector('progress.ert-progress');
 
 document.addEventListener('scroll', function (e) {
     let parent = document.getElementById('ert-start').parentElement;
+    let barContent = document.getElementById('ert-progress-percentage');
     let start = parent.offsetTop;
     let end = parent.offsetHeight;
     let w = 0;
@@ -27,10 +28,10 @@ document.addEventListener('scroll', function (e) {
 
     if (currentPosition > start) {
         w = (currentPosition - start) / (end + (scrollHeight * offset / 2) - scrollHeight) * 100;
-        console.log(w);
     }
 
     readingProgress.value = w;
+    barContent.innerHTML = Math.floor(w) + '%';
 });
 
 //Adapted from https://css-tricks.com/reading-position-indicator/

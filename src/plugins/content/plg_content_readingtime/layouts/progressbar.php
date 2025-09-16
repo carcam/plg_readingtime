@@ -14,7 +14,7 @@ extract($displayData);
 ?>
 <div class="ert-progress-container">
 <?php if ($indicatorLabel) :?>
-    <label for="ert-progressbar"><?php echo Text::_('PLG_READINGTIME_PROGRESS_INDICATOR_LABEL');?> <span class="ert-progress-percentage">0%</span></label>
+    <label for="ert-progressbar"><?php echo Text::_('PLG_READINGTIME_PROGRESS_INDICATOR_LABEL');?> <span id="ert-progress-percentage" class="ert-progress-percentage">0%</span></label>
 <?php endif; ?>
-<progress id="ert-progressbar" class="ert-progress progress" max="100" value="0"></progress>
+    <progress id="ert-progressbar" class="ert-progress progress" max="100" value="0"></progress>
 </div>
