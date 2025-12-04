@@ -1,0 +1,19 @@
+#!/bin/bash
+
+## Description: Switch active Joomla version
+## Usage: switch-joomla [version]
+## Example: "ddev switch-joomla 5"
+
+VERSION="${1:-6}"
+CMS_DIR="/var/www/html/tests/cms"
+TARGET_DIR="$CMS_DIR/joomla$VERSION"
+LINK_NAME="$CMS_DIR/current"
+
+if [ ! -d "$TARGET_DIR" ]; then
+    echo "Directory $TARGET_DIR does not exist. Please run 'tests/setup/install-joomla.sh $VERSION' first."
+    exit 1
+fi
+
+rm -f "$LINK_NAME"
+ln -s "joomla$VERSION" "$LINK_NAME"
+echo "Switched to Joomla $VERSION"

@@ -1,6 +1,6 @@
 name: readingtime
 type: php
-docroot: joomla/public
+docroot: tests/cms/current/public
 php_version: "8.4"
 webserver_type: apache-fpm
 xdebug_enabled: false
@@ -13,7 +13,7 @@ upload_dirs:
     - images
     - files
 working_dir:
-    web: /var/www/html/joomla
+    web: /var/www/html
 use_dns_when_possible: true
 composer_version: "2"
 web_environment: []

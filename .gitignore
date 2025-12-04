@@ -70,7 +70,7 @@ vendor
 
 # Testing #
 ###########
-joomla
+tests/cms/
 
 # Build artifacts
 /build/package/
